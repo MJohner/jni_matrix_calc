@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 class Tests {
+	static{
+		System.loadLibrary("lib/Cpp_Matrix");
+	}
 	Matrix a, b, c, d, p, q;
 	
 	@BeforeEach

@@ -35,30 +35,50 @@ public class Matrix {
     }
 
     public Matrix multiplyCpp(Matrix m){
-        return null;
-    }
+        double[] result = new double[this.rows * m.cols];
+        multiplyNative(this.values, m.values, result, this.cols, m.cols, this.rows);
+        return new Matrix(this.rows, m.cols, result);
+    };
 
-    public Matrix power(int exp){
+    public native void multiplyNative(double[] m1, double[] m2, double[] result, int m1_cols, int m2_cols, int result_cols);
+    public native void powerNative(double[] m, double[] result, int m_cols, int result_rows, int exp);
+
+    public Matrix powerCpp(int exp){
+        if(exp<0){
+            throw new IllegalArgumentException("The exponent must be 0 or greater");
+        }
         if(this.cols != this.rows){
             throw new UnsupportedOperationException("The matrix is not a square matrix rows: " + this.rows + " cols: " + this.cols);
         }
-        Matrix result;
-        if(exp > 0){
-            result = this;
-        }else{
-            result = identity(this);
+        if(exp == 0){
+            return identity(this);
         }
-        while(exp > 0){
+
+        double[] result = new double[this.rows * this.cols];
+        powerNative(this.values, result, this.cols, this.cols, exp);
+        return new Matrix(this.rows, this.cols, result);
+    }
+
+    public Matrix power(int exp){
+        if(exp<0){
+          throw new IllegalArgumentException("The exponent must be 0 or greater");
+        }
+        if(this.cols != this.rows){
+            throw new UnsupportedOperationException("The matrix is not a square matrix rows: " + this.rows + " cols: " + this.cols);
+        }
+        if(exp == 0){
+            return identity(this);
+        }
+        Matrix result;
+        result = this;
+        for(int i=1;i < exp; i++){
             result = multiply(result);
-            exp--;
         }
         return result;
     }
-    public Matrix powerCpp(int e){
-        return null;
-    }
 
-    private Matrix identity(Matrix m){
+
+    public Matrix identity(Matrix m){
         double result[] = new double[m.rows * m.cols];
         for(int row = 0; row < m.rows; row++){
             for(int col = 0; col < m.cols; col++){
@@ -86,7 +106,7 @@ public class Matrix {
             throw new InvalidParameterException("The Matrix m is null");
         }
         if(this.cols != m.rows){
-            throw new InvalidParameterException("The Matrix A has: "+this.cols + " columns and the Matrix B has: " + m.rows + " rows. Multiply not possible.");
+            throw new InvalidParameterException("The Matrix A has: "+ this.cols + " columns and the Matrix B has: " + m.rows + " rows. Multiply not possible.");
         }
         double[] result = new double[this.rows * m.cols];
         for(int row = 0; row < this.rows; row++){

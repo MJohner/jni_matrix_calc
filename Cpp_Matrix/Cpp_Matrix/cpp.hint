@@ -1,0 +1,2 @@
+#define JNIEXPORT __declspec(dllexport)
+#define JNICALL

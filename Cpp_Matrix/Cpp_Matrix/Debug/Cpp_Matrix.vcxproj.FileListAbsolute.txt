@@ -1,2 +1,0 @@
-C:\Users\Melvin\dev_repos\jni_matrix_calc\Cpp_Matrix\Cpp_Matrix\Debug\Cpp_Matrix.dll
-C:\Users\Melvin\dev_repos\jni_matrix_calc\Cpp_Matrix\Cpp_Matrix\Debug\Cpp_Matrix.pdb

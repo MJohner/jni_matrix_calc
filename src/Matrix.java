@@ -38,10 +38,10 @@ public class Matrix {
         double[] result = new double[this.rows * m.cols];
         multiplyNative(this.values, m.values, result, this.cols, m.cols, this.rows);
         return new Matrix(this.rows, m.cols, result);
-    };
+    }
 
     public native void multiplyNative(double[] m1, double[] m2, double[] result, int m1_cols, int m2_cols, int result_cols);
-    public native void powerNative(double[] m, double[] result, int m_cols, int result_rows, int exp);
+    public native void powerNative(double[] m, double[] result, int m_cols, int exp);
 
     public Matrix powerCpp(int exp){
         if(exp<0){
@@ -55,7 +55,7 @@ public class Matrix {
         }
 
         double[] result = new double[this.rows * this.cols];
-        powerNative(this.values, result, this.cols, this.cols, exp);
+        powerNative(this.values, result, this.cols, exp);
         return new Matrix(this.rows, this.cols, result);
     }
 

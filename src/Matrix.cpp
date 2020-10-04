@@ -4,14 +4,14 @@
 void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m2_cols, jint result_rows) {
 	for (size_t row = 0; row < result_rows; row++) {
 		size_t pointerCache1 = row * m1_cols;
-		size_t pointerCache2 = row * m2_cols;
-		for (size_t col = 0; col < m2_cols; col++) {
+		size_t multCache = row * m2_cols;
+			for (size_t col = 0; col < m2_cols; col++) {
 			double sum = 0.0;
-			pointerCache2 += col;
+			size_t pointerCache2 = multCache + col;
 			for (size_t i = 0; i < m1_cols; i++) {
-				sum += p_m1[(row * m1_cols + i)] * p_m2[col + i * m2_cols];
+				sum += p_m1[(pointerCache1 + i)] * p_m2[i * m2_cols+col];
 			}
-			p_result[row * result_rows + col] = sum;
+			p_result[pointerCache2] = sum;
 		}
 	}
 }
@@ -54,6 +54,7 @@ JNIEXPORT void JNICALL Java_Matrix_powerNative
 
 	env->ReleaseDoubleArrayElements(m, p_m, NULL);
 	env->ReleaseDoubleArrayElements(result, p_result, NULL);
+	delete[] temp;
 
 }
 

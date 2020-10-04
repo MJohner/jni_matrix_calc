@@ -53,10 +53,13 @@ public class Matrix {
         if(exp == 0){
             return identity(this);
         }
+        if(exp==1){
+            return new Matrix(this.cols, this.cols, this.values);
+        }
 
-        double[] result = new double[this.rows * this.cols];
+        double[] result = new double[this.cols * this.cols];
         powerNative(this.values, result, this.cols, exp);
-        return new Matrix(this.rows, this.cols, result);
+        return new Matrix(this.cols, this.cols, result);
     }
 
     public Matrix power(int exp){

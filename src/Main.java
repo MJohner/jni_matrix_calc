@@ -11,7 +11,7 @@ public class Main {
 //        Matrix mc = measureMultiplyCpp(m1, m2);
 //        System.out.println("Is Matrix equal: " + mj.equals(mc));
 //
-         Matrix m = new Matrix(2,2,2);
+         Matrix m = new Matrix(3,3,2);
         System.out.println(Arrays.toString(m.powerCpp(1).values));
         System.out.println(Arrays.toString(m.powerCpp(2).values));
         System.out.println(Arrays.toString(m.powerCpp(3).values));

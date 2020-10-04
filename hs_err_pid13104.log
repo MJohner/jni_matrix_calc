@@ -1,0 +1,30 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (t:/workspace/open/src/hotspot/os_cpu/windows_x86/os_windows_x86.cpp:145), pid=13104, tid=25508
+#  guarantee(result == EXCEPTION_CONTINUE_EXECUTION) failed: Unexpected result from topLevelExceptionFilter
+#
+# JRE version: Java(TM) SE Runtime Environment (13.0.2+8) (build 13.0.2+8)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (13.0.2+8, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -javaagent:C:\Users\Melvin\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\201.7846.76\lib\idea_rt.jar=61655:C:\Users\Melvin\AppData\Local\JetBrains\Toolbox\apps\IDEA-C\ch-0\201.7846.76\bin -Dfile.encoding=UTF-8 Main
+
+Host: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz, 8 cores, 15G,  Windows 10 , 64 bit Build 18362 (10.0.18362.1082)
+Time: Sun Oct  4 21:35:17 2020 Mitteleuropäische Sommerzeit elapsed time: 2 seconds (0d 0h 0m 2s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001a8e12fe000):  JavaThread "main" [_thread_in_native, id=25508, stack(0x0000007424d00000,0x0000007424e00000)]
+
+Stack: [0x0000007424d00000,0x0000007424e00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x624f9a]

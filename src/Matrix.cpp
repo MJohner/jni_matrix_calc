@@ -34,7 +34,7 @@ JNIEXPORT void JNICALL Java_Matrix_powerNative
 	double *p_m = env->GetDoubleArrayElements(m, NULL);
 	double *p_result = env->GetDoubleArrayElements(result, NULL);
 	size_t result_lenght = env->GetArrayLength(result);
-	jdouble* temp = new jdouble[result_lenght];
+	double* temp = new double[result_lenght];
 
 	memcpy(temp, p_m, sizeof(double) * result_lenght);
 

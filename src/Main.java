@@ -5,16 +5,20 @@ public class Main {
         System.loadLibrary("lib/Cpp_Matrix");
     }
     public static void main(String[] args){
-        Matrix m1 = new Matrix(500,6000);
-        Matrix m2 = new Matrix(6000,400);
-        Matrix m3 = new Matrix(250,250);
-        Matrix mj = measureMultiplyJava(m1, m2);
-        Matrix mc = measureMultiplyCpp(m1, m2);
-        System.out.println("Multiply Matrix is equal: " + mj.equals(mc));
-        Matrix pj = measurePowerJava(m3);
-        Matrix pc = measurePowerCpp(m3);
-        System.out.println("Power Matrix is equal: " +pj.equals(pc));
+//        Matrix m1 = new Matrix(500,6000);
+//        Matrix m2 = new Matrix(6000,400);
+//        Matrix m3 = new Matrix(250,250);
+//        Matrix mj = measureMultiplyJava(m1, m2);
+//        Matrix mc = measureMultiplyCpp(m1, m2);
 
+//        System.out.println("Multiply Matrix is equal: " + mj.equals(mc));
+        // Matrix pj = measurePowerJava(m3);
+        // Matrix pc = measurePowerCpp(m3);
+        // System.out.println("Power Matrix is equal: " +pj.equals(pc));
+            Matrix m1 = new Matrix(3,3, new double[]{1,2,3,4,5,6,7,8,9});
+            Matrix m3 = m1.power(7);
+            System.out.println(Arrays.toString(m3.values));
+            // System.out.println(m3.equals(m4));
     }
 
     public static Matrix measureMultiplyJava(Matrix m1, Matrix m2){

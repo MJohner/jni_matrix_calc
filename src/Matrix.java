@@ -11,7 +11,7 @@ public class Matrix {
         Random r = new Random();
         this.cols = cols;
         this.rows = rows;
-        for(int i=0; i<values.length; i++){
+        for(int i=0; i < values.length; i++){
             values[i] = r.nextDouble();
         }
     }
@@ -20,7 +20,7 @@ public class Matrix {
         values = new double[cols * rows];
         this.cols = cols;
         this.rows = rows;
-        for(int i=0; i<values.length; i++){
+        for(int i=0; i < values.length; i++){
             values[i] = number;
         }
     }
@@ -29,8 +29,10 @@ public class Matrix {
         values = new double[cols * rows];
         this.cols = cols;
         this.rows = rows;
-        for(int i=0; i<values.length; i++){
-            values[i] = numbers[i%numbers.length];
+        if(numbers.length == values.length){
+            values = numbers;
+        }else{
+            throw new IllegalArgumentException("The given numbers array does not fit into the requested matrix");
         }
     }
 
@@ -72,10 +74,9 @@ public class Matrix {
         if(exp == 0){
             return identity(this);
         }
-        Matrix result;
-        result = this;
+        Matrix result = new Matrix(this.rows, this.cols, this.values);
         for(int i=1;i < exp; i++){
-            result = multiply(result);
+            multiply(this, result);
         }
         return result;
     }
@@ -84,14 +85,9 @@ public class Matrix {
     public Matrix identity(Matrix m){
         double result[] = new double[m.rows * m.cols];
         for(int row = 0; row < m.rows; row++){
-            for(int col = 0; col < m.cols; col++){
-                if(col == row){
-                    result[row*m.cols + col] = 1;
-                }
-            }
+            result[row*m.cols+row] = 1;
         }
         return new Matrix(m.rows, m.cols, result);
-
     }
 
     @Override
@@ -104,24 +100,30 @@ public class Matrix {
         return isEqual && Arrays.equals(this.values, m.values);
     }
 
-    public Matrix multiply(Matrix m){
-        if(m == null){
-            throw new InvalidParameterException("The Matrix m is null");
+    private void multiply(Matrix m, Matrix r){
+        if(m == null || r == null){
+            throw new InvalidParameterException("The Matrix m or r is null");
         }
-        if(this.cols != m.rows){
-            throw new InvalidParameterException("The Matrix A has: "+ this.cols + " columns and the Matrix B has: " + m.rows + " rows. Multiply not possible.");
+        if(m.cols != r.rows){
+            throw new InvalidParameterException("The Matrix A has: "+ m.cols + " columns and the Matrix B has: " + r.rows + " rows. Multiply not possible.");
         }
-        double[] result = new double[this.rows * m.cols];
-        for(int row = 0; row < this.rows; row++){
-            for(int col = 0; col < m.cols; col++){
+        double[] result = new double[m.rows * r.cols];
+        for(int row = 0; row < m.rows; row++){
+            for(int col = 0; col < r.cols; col++){
                 double sum = 0;
-                for(int i = 0; i < this.cols; i++){
-                    sum += this.values[row*this.cols +i] * m.values[col+i*m.cols];
+                for(int i = 0; i < m.cols; i++){
+                    sum += m.values[row*m.cols +i] * r.values[col+i*r.cols];
                 }
-                result[row*m.cols + col] = sum;
+                result[row*r.cols + col] = sum;
             }
         }
-        return new Matrix(this.rows, m.cols, result);
+        r.rows = m.rows;
+        r.values = result;
+    }
+
+    public Matrix multiply(Matrix m){
+        multiply(this, m);
+        return m;
     }
 
 }

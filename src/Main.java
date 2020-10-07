@@ -22,7 +22,7 @@ public class Main {
         long startTime = System.nanoTime();
         Matrix m3 = m1.multiply(m2);
         long stopTime = System.nanoTime();
-        System.out.println("Multiply calculation finished in: " + (stopTime-startTime) + " nanoseconds (Java)");
+        System.out.println("Multiply calculation finished in: " + (stopTime-startTime) / 1000000+ " milliseconds (Java)");
         return m3;
     }
     public static Matrix measureMultiplyCpp(Matrix m1, Matrix m2){
@@ -30,7 +30,7 @@ public class Main {
         long startTime = System.nanoTime();
         Matrix m3 = m1.multiplyCpp(m2);
         long stopTime = System.nanoTime();
-        System.out.println("Multiply calculation finished in: " + (stopTime-startTime) + " nanoseconds (C++)");
+        System.out.println("Multiply calculation finished in: " + (stopTime-startTime) / 1000000+ " milliseconds (C++)");
         return m3;
     }
 
@@ -38,7 +38,7 @@ public class Main {
         long startTime = System.nanoTime();
         Matrix m3 = m.power(93);
         long stopTime = System.nanoTime();
-        System.out.println("Power calculation finished in: " + (stopTime-startTime) + " nanoseconds (Java)");
+        System.out.println("Power calculation finished in: " + (stopTime-startTime) / 1000000+ " milliseconds (Java)");
         return m3;
     }
 
@@ -46,27 +46,7 @@ public class Main {
         long startTime = System.nanoTime();
         Matrix m3 = m.powerCpp(93);
         long stopTime = System.nanoTime();
-        System.out.println("Power calculation finished in: " + (stopTime-startTime) + " nanoseconds (C++)");
+        System.out.println("Power calculation finished in: " + (stopTime-startTime) / 1000000 + " milliseconds (C++)");
         return m3;
     }
 }
-
-/*
-Output Test debug dll:
-    Multiply calculation finished in: 7188819099 nanoseconds (Java)
-    Multiply calculation finished in: 8969594400 nanoseconds (C++)
-    Multiply Matrix is equal: true
-    Power calculation finished in: 2069102900 nanoseconds (Java)
-    Power calculation finished in: 4961769700 nanoseconds (C++)
-    Power Matrix is equal: true
-*/
-
-/*
-Output Test release dll:
-    Multiply calculation finished in: 7282346100 nanoseconds (Java)
-    Multiply calculation finished in: 6873522800 nanoseconds (C++)
-    Multiply Matrix is equal: true
-    Power calculation finished in: 2126658100 nanoseconds (Java)
-    Power calculation finished in: 1746182900 nanoseconds (C++)
-    Power Matrix is equal: true
-*/

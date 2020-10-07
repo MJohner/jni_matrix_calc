@@ -17,22 +17,22 @@ void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m
 }
 JNIEXPORT void JNICALL Java_Matrix_multiplyNative
 (JNIEnv* env, jobject, jdoubleArray m1, jdoubleArray m2, jdoubleArray result, jint m1_cols, jint m2_cols, jint result_rows) {
-	double *p_m1 = env->GetDoubleArrayElements(m1, NULL);
-	double *p_m2 = env->GetDoubleArrayElements(m2, NULL);
-	double *p_result = env->GetDoubleArrayElements(result, NULL);
+	double *p_m1 = env->GetDoubleArrayElements(m1, nullptr);
+	double *p_m2 = env->GetDoubleArrayElements(m2, nullptr);
+	double *p_result = env->GetDoubleArrayElements(result, nullptr);
 
 	multiply(p_m1, p_m2, p_result, m1_cols, m2_cols, result_rows);
 
-	env->ReleaseDoubleArrayElements(result, p_result, NULL);
-	env->ReleaseDoubleArrayElements(m1, p_m1, NULL);
-	env->ReleaseDoubleArrayElements(m2, p_m2, NULL);
+	env->ReleaseDoubleArrayElements(result, p_result, 0);
+	env->ReleaseDoubleArrayElements(m1, p_m1, 0);
+	env->ReleaseDoubleArrayElements(m2, p_m2, 0);
 }
 
 JNIEXPORT void JNICALL Java_Matrix_powerNative
 (JNIEnv* env, jobject, jdoubleArray m, jdoubleArray result, jint m_cols, jint exp) {
 	
-	double *p_m = env->GetDoubleArrayElements(m, NULL);
-	double *p_result = env->GetDoubleArrayElements(result, NULL);
+	double *p_m = env->GetDoubleArrayElements(m, nullptr);
+	double *p_result = env->GetDoubleArrayElements(result, nullptr);
 	size_t result_lenght = env->GetArrayLength(result);
 	double* temp = new double[result_lenght];
 
@@ -52,8 +52,8 @@ JNIEXPORT void JNICALL Java_Matrix_powerNative
 		memcpy(p_result, temp, sizeof(double) * result_lenght);
 	}
 
-	env->ReleaseDoubleArrayElements(m, p_m, NULL);
-	env->ReleaseDoubleArrayElements(result, p_result, NULL);
+	env->ReleaseDoubleArrayElements(m, p_m, 0);
+	env->ReleaseDoubleArrayElements(result, p_result, 0);
 	delete[] temp;
 
 }

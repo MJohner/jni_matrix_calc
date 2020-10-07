@@ -81,7 +81,6 @@ public class Matrix {
         return result;
     }
 
-
     public Matrix identity(Matrix m){
         double result[] = new double[m.rows * m.cols];
         for(int row = 0; row < m.rows; row++){
@@ -108,13 +107,17 @@ public class Matrix {
             throw new InvalidParameterException("The Matrix A has: "+ m.cols + " columns and the Matrix B has: " + r.rows + " rows. Multiply not possible.");
         }
         double[] result = new double[m.rows * r.cols];
+
         for(int row = 0; row < m.rows; row++){
+            int pointerCache1 = row * m.cols;
+            int multCache = row * r.cols;
             for(int col = 0; col < r.cols; col++){
-                double sum = 0;
+                double sum = 0.0;
+                int pointerCache2 = multCache + col;
                 for(int i = 0; i < m.cols; i++){
-                    sum += m.values[row*m.cols +i] * r.values[col+i*r.cols];
+                    sum += m.values[pointerCache1 + i] * r.values[i * r.cols + col];
                 }
-                result[row*r.cols + col] = sum;
+                result[pointerCache2] = sum;
             }
         }
         r.rows = m.rows;

@@ -1,11 +1,36 @@
 #include "Matrix.h"
 #include <iostream>
 
+/*
+void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m2_cols, jint result_rows) {
+	size_t pointerCache1 = 0;
+	size_t multCache = 0;
+	for (size_t row = 0; row < result_rows; row++) {
+		pointerCache1 += m1_cols;
+		multCache += m2_cols;
+		size_t p_result_cur = multCache;
+		for (size_t col = 0; col < m2_cols; col++) {
+			p_result_cur++;
+			size_t p_m1_cur = pointerCache1;
+			size_t p_m2_cur = col;
+			size_t sum = 0;
+			for (size_t i = 0; i < m1_cols; i++) {
+				p_m1_cur++;
+				p_m2_cur += m2_cols;
+				sum += p_m1[p_m1_cur] * p_m2[p_m2_cur];
+			}
+			p_result[p_result_cur] = sum;
+
+		}
+	}
+}
+*/
+
 void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m2_cols, jint result_rows) {
 	for (size_t row = 0; row < result_rows; row++) {
 		size_t pointerCache1 = row * m1_cols;
 		size_t multCache = row * m2_cols;
-			for (size_t col = 0; col < m2_cols; col++) {
+		for (size_t col = 0; col < m2_cols; col++) {
 			double sum = 0.0;
 			size_t pointerCache2 = multCache + col;
 			for (size_t i = 0; i < m1_cols; i++) {

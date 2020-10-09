@@ -1,4 +1,6 @@
 ﻿  Matrix.cpp
+C:\Users\Melvin\dev_repos\jni_matrix_calc\src\Matrix.cpp(19,43): warning C4244: '+=': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\Melvin\dev_repos\jni_matrix_calc\src\Matrix.cpp(21,29): warning C4244: '=': conversion from 'size_t' to 'double', possible loss of data
      Creating library C:\Users\Melvin\dev_repos\jni_matrix_calc\Cpp_Matrix\Cpp_Matrix\x64\Release\Cpp_Matrix.lib and object C:\Users\Melvin\dev_repos\jni_matrix_calc\Cpp_Matrix\Cpp_Matrix\x64\Release\Cpp_Matrix.exp
   Generating code
   3 of 7 functions (42.9%) were compiled, the rest were copied from previous compilation.

@@ -2,6 +2,9 @@
 #include <iostream>
 
 /*
+Try to optimise the pointers without multiplications
+Gives an access error...
+
 void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m2_cols, jint result_rows) {
 	size_t pointerCache1 = 0;
 	size_t multCache = 0;
@@ -31,7 +34,7 @@ void multiply(double* p_m1, double* p_m2, double* p_result, jint m1_cols, jint m
 		size_t pointerCache1 = row * m1_cols;
 		size_t multCache = row * m2_cols;
 		for (size_t col = 0; col < m2_cols; col++) {
-			double sum = 0.0;
+			jdouble sum = 0.0;
 			size_t pointerCache2 = multCache + col;
 			for (size_t i = 0; i < m1_cols; i++) {
 				sum += p_m1[(pointerCache1 + i)] * p_m2[i * m2_cols + col];
@@ -60,7 +63,7 @@ JNIEXPORT void JNICALL Java_Matrix_powerNative
 	double *p_m = env->GetDoubleArrayElements(m, nullptr);
 	double *p_result = env->GetDoubleArrayElements(result, nullptr);
 	size_t result_lenght = env->GetArrayLength(result);
-	double* temp = new double[result_lenght];
+	double *temp = new double[result_lenght];
 	size_t i = 1;
 	for (; i < exp; i++) {
 		if (i == 1) {

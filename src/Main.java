@@ -5,15 +5,19 @@ public class Main {
         System.loadLibrary("lib/Cpp_Matrix");
     }
     public static void main(String[] args){
-        Matrix m1 = new Matrix(500,6000);
-        Matrix m2 = new Matrix(6000,400);
-        Matrix m3 = new Matrix(250,250);
-        Matrix mj = measureMultiplyJava(m1, m2);
-        m2 = new Matrix(6000,400);
-        Matrix mc = measureMultiplyCpp(m1, m2);
+        Matrix m1Java = new Matrix(500,6000);
+        Matrix m2Java = new Matrix(6000,400);
+        Matrix m3Java = new Matrix(250,250);
+
+        Matrix m1Cpp = new Matrix(500,6000, m1Java.values); // <-- This took me 4 hours -.-
+        Matrix m2Cpp = new Matrix(6000,400, m2Java.values );
+        Matrix m3Cpp = new Matrix(250,250, m3Java.values);
+
+        Matrix mj = measureMultiplyJava(m1Java, m2Java);
+        Matrix mc = measureMultiplyCpp(m1Cpp, m2Cpp);
         System.out.println("Multiply Matrix is equal: " + mj.equals(mc));
-        Matrix pj = measurePowerJava(m3);
-        Matrix pc = measurePowerCpp(m3);
+        Matrix pj = measurePowerJava(m3Java);
+        Matrix pc = measurePowerCpp(m3Cpp);
         System.out.println("Power Matrix is equal: " + pj.equals(pc));
     }
 
@@ -52,20 +56,20 @@ public class Main {
 }
 /*
 Debug DLL:
-Multiply calculation finished in: 7423 milliseconds (Java)
-Multiply calculation finished in: 10115 milliseconds (C++)
-Multiply Matrix is equal: false
-Power calculation finished in: 2104 milliseconds (Java)
-Power calculation finished in: 5157 milliseconds (C++)
+Multiply calculation finished in: 7614 milliseconds (Java)
+Multiply calculation finished in: 10126 milliseconds (C++)
+Multiply Matrix is equal: true
+Power calculation finished in: 2149 milliseconds (Java)
+Power calculation finished in: 5557 milliseconds (C++)
 Power Matrix is equal: true
  */
 
 /*
 Release DLL:
-Multiply calculation finished in: 7813 milliseconds (Java)
-Multiply calculation finished in: 9721 milliseconds (C++)
-Multiply Matrix is equal: false
-Power calculation finished in: 2063 milliseconds (Java)
-Power calculation finished in: 5028 milliseconds (C++)
+Multiply calculation finished in: 7577 milliseconds (Java)
+Multiply calculation finished in: 7475 milliseconds (C++)
+Multiply Matrix is equal: true
+Power calculation finished in: 2213 milliseconds (Java)
+Power calculation finished in: 1842 milliseconds (C++)
 Power Matrix is equal: true
  */
